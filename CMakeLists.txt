@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(map_image)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+ add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -21,7 +21,8 @@ OpenCV REQUIRED
 )
 
 
-
+find_package(Boost REQUIRED COMPONENTS program_options filesystem)
+ 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
@@ -214,10 +215,23 @@ include_directories(
   include
   ${catkin_INCLUDE_DIRS}
   ${EIGEN3_INCLUDE_DIRS}
+  ${Boost_INCLUDE_DIRS}
+ 
   )
 
 add_executable(map_image src/map_imageOpencv.cpp)
 target_link_libraries(map_image ${catkin_LIBRARIES})
+
+add_library( world src/world_generator.cpp )
+add_library( path src/path_generator.cpp )
+add_library( heuristic src/heuristic_generator.cpp )
+
+add_executable ( astar src/main.cpp )
+
+target_include_directories ( astar PRIVATE ${include} )
+target_link_libraries ( astar  world path heuristic ${Boost_LIBRARIES} ${OpenCV_LIBS} )
+
+
 ##target_link_libraries (map_image Eigen3::Eigen)
 
 #path planning
