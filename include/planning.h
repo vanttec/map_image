@@ -9,8 +9,8 @@
 #include <iostream>
 
 // Image Settings
-#define IM_WIDTH  640 
-#define IM_HEIGHT 480
+#define IM_WIDTH  1000 
+#define IM_HEIGHT 1000
 #define IM_WINDOW 10
 
 // Grid size
@@ -57,7 +57,7 @@ namespace Planner {
 
 		public:
 			Map();
-			int  set_input_map(std::string input_path);
+			int  set_input_map(cv::Mat& input_map);
 			int  create_obstacle_map(int dilation);
 			int  generate_world();
 			void print_world();

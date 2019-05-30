@@ -229,7 +229,7 @@ add_library( heuristic src/heuristic_generator.cpp )
 add_executable ( astar src/main.cpp )
 
 target_include_directories ( astar PRIVATE ${include} )
-target_link_libraries ( astar  world path heuristic ${Boost_LIBRARIES} ${OpenCV_LIBS} )
+target_link_libraries ( astar  world path heuristic ${Boost_LIBRARIES} ${OpenCV_LIBS} ${catkin_LIBRARIES})
 
 
 ##target_link_libraries (map_image Eigen3::Eigen)

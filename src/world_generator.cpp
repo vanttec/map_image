@@ -18,8 +18,8 @@ Map::Map() {
 		input_path (std::string)
    @returns:
 		1 if succesfull, 0 otherwise */
-int Map::set_input_map(std::string input_path) {
-	input_map = cv::imread(input_path, cv::IMREAD_COLOR);
+int Map::set_input_map(cv::Mat& input_map1) {
+	input_map = input_map1;
 	if (!input_map.data) {
 		std::cout << "No image data. " << std::endl;
 		return 0;
